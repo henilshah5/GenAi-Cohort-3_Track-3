@@ -1,0 +1,28 @@
+# Use official lightweight Python image
+FROM python:3.11-slim
+
+# Set environment variables
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PORT=8080
+
+# Set working directory
+WORKDIR /app
+
+# Install system dependencies if required
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements and install dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy application source code
+COPY . .
+
+# Expose port (Cloud Run automatically injects PORT environment variable)
+EXPOSE 8080
+
+# Start FastAPI application using Uvicorn
+CMD exec uvicorn main:app --host 0.0.0.0 --port ${PORT:-8080}

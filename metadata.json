@@ -1,0 +1,6 @@
+{
+  "name": "Cloud Run Daily Operations Agent",
+  "description": "Automated daily operations productivity assistant for business owners to track sales, manage inventory, execute tool workflows, and deploy on Google Cloud Run.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
